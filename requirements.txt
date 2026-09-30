@@ -1,0 +1,13 @@
+# Course dependencies (used by environment.yml and by the Colab setup cell).
+cobra==0.32.1
+cameo==0.13.6          # unmaintained since 2021; see cameo_compat.py
+escher==1.8.1
+optlang==1.9.1
+swiglpk==5.0.13
+scipy>=1.11
+plotly>=5,<8
+matplotlib>=3.8
+numpy>=1.26,<2.4       # cameo uses numpy.trapz, removed in numpy 2.4
+pandas>=2,<3           # cobra 0.32 requires pandas<3
+setuptools<81          # cameo imports pkg_resources, removed in setuptools 81
+ipywidgets>=7.7,<8     # escher's widget requires ipywidgets 7

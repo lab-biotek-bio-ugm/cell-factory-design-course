@@ -1,0 +1,55 @@
+name: notebooks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"  # weekly, to catch upstream breakage (BiGG, Escher maps, PyPI)
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install nbformat "bibtexparser<2"
+      - run: make check
+
+  notebooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        notebook:
+          - 01-Getting-started
+          - 02-Genome-scale-metabolic-models
+          - 03-Pathway-visualization
+          - 04-Analyzing-metabolic-models
+          - 05-Manipulating-models
+          - 06-Gene-essentiality
+          - 07-Theoretical-maximum-yields
+          - 08-Predict-heterologous-pathways
+          - 09-Predict-gene-knockout-strategies
+          - 10-Predict-gene-expression-modulation-targets
+          - 11-dynamic-fba
+          - 12-Proteomics-Integration
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+      - name: Run instructor and student versions
+        run: |
+          for kind in instructor student; do
+            jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 \
+              --output-dir "$RUNNER_TEMP/$kind" "$kind/${{ matrix.notebook }}.ipynb"
+          done
