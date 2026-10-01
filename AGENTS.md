@@ -49,10 +49,13 @@ make clean     # clear outputs in place
 ## Dependencies and gotchas
 
 - `requirements.txt` is what Colab installs; keep it compatible with Colab's preinstalled stack
-  (Python 3.13, numpy 2.1, pandas 2.2, ipywidgets 7). `requirements-lock.txt` pins exact versions
+  (Python 3.13, numpy 2.1, pandas 2.2). `requirements-lock.txt` pins exact versions
   (regenerate with `pip list --format=freeze` after a verified run).
 - Pins that exist for cameo: `numpy<2.4` (numpy.trapz), `setuptools<81` (pkg_resources),
-  `ipywidgets<8` (escher), `pandas<3` (also cobra).
+  `pandas<3` (also cobra).
+- escher is installed from a pinned GitHub commit (2.0.0, anywidget-based): 1.8.1 on PyPI needs
+  ipywidgets 7 and shows "Error displaying widget: model not found" in JupyterLab 4 and Colab.
+  Switch to the PyPI release once 2.0 is published.
 - Solver is GLPK. MILP methods (pathway prediction, OptKnock) are slow and can return different,
   equally good answers between runs; seed OptGene and hedge text about specific designs.
 - Notebook 12 sets GLPK to dual simplex (`use_dual_simplex`); the default primal simplex stalls on
