@@ -2,7 +2,7 @@ name: notebooks
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
   schedule:
     - cron: "0 6 * * 1"  # weekly, to catch upstream breakage (BiGG, Escher maps, PyPI)

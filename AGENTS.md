@@ -7,6 +7,7 @@ genome-scale metabolic models with COBRApy and cameo. See README.md for the cour
 
 - `instructor/` is the source of truth: notebooks with worked solutions. Edit only these.
 - `student/` is generated from `instructor/` by `make_student.py`. Never edit it by hand.
+- `colab-setup.ipynb` copies the whole repo into a student's Google Drive (Colab only; not tested in CI).
 - `data/` holds every model and dataset the notebooks load. Notebooks read `data/...` relative to
   the repo root; the setup cell (tag `setup`) moves there, both locally and on Colab.
 - `references.bib` holds all citations; `render_refs.py` renders them into the notebooks.

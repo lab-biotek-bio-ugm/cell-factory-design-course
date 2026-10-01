@@ -38,6 +38,12 @@ Click a Colab link above and run the first (setup) cell. It clones this reposito
 manager (needed for Escher maps). Save a copy to your Drive (*File → Save a copy in Drive*) to keep
 your work.
 
+To get the whole course at once, open
+[colab-setup.ipynb](https://colab.research.google.com/github/lab-biotek-bio-ugm/cell-factory-design-course/blob/main/colab-setup.ipynb)
+and run its one cell. It copies the repository into `MyDrive/cell-factory-design-course`. Then open the
+notebooks from Google Drive (right-click → *Open with* → *Google Colaboratory*), and your changes save
+automatically. The setup cell still runs in every notebook, because each Colab notebook runs on its own fresh machine.
+
 ## Run locally
 
 ```bash
