@@ -5,7 +5,10 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    - cron: "0 6 * * 1"  # weekly, to catch upstream breakage (BiGG, Escher maps, PyPI)
+    # about every 45 days, to catch upstream breakage (BiGG, Escher maps, PyPI); cron cannot
+    # count days, so alternate the 1st and 15th: 1 Jan, 15 Feb, 1 Apr, 15 May, ...
+    - cron: "0 6 1 1,4,7,10 *"
+    - cron: "0 6 15 2,5,8,11 *"
   workflow_dispatch:
 
 jobs:
